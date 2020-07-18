@@ -28,7 +28,7 @@ PROJECT_ID=$(gcloud config get-value project)
 PROJECT_NUMBER=$(gcloud projects list --filter="project_id=${PROJECT_ID}" --format="value(project_number)")
 
 echo "Enabling Google Cloud Build API." >&2
-[[ $(gcloud services list --format='value(config.name)' --filter='config.name=cloudbuild.googleapis.com' ]] ||
+[[ $(gcloud services list --format='value(config.name)' --filter='config.name=cloudbuild.googleapis.com') ]] ||
   { gcloud services enable cloudbuild.googleapis.com; }
 
 echo "Adding permissions to default Cloud Build service account." >&2
