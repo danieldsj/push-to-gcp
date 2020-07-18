@@ -1,11 +1,19 @@
 # push-to-gcp
 BASH scripts that can be used to bootstrap small projects that can be tested, built, and deployed to Google Cloud Platform with a Git push operation.
 
+## Features
+* Adds necessary role bindings to project's Google Build service account.
+* Creates a Google Cloud Source Repository.
+* Adds the Google Cloud Source Repository as a remote on the local Git repository.
+* Creates a Google Cloud Build trigger.
+* Provides instructions on how to push.
+* Provides instructions on how to get the URL of what you pushed.
+
 ## Requirements
 * Cloud SDK must be installed.
 * You must authenticate using the `gcloud` command.
 * You must set a project using the `gcloud` command.
-* You must initialize the git repository.
+* You must initialize the Git repository.
 
 ## Usage
 ```
