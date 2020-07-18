@@ -46,7 +46,7 @@ gcloud projects add-iam-policy-binding $PROJECT_ID \
   --role roles/cloudfunctions.admin
 
 gcloud iam service-accounts add-iam-policy-binding \
-  $PROJECT_NUMBER-compute@developer.gserviceaccount.com \
+  $PROJECT_ID@appspot.gserviceaccount.com \
   --member="serviceAccount:$PROJECT_NUMBER@cloudbuild.gserviceaccount.com" \
   --role="roles/iam.serviceAccountUser"
 
@@ -103,7 +103,7 @@ steps:
     - 'deploy'
     - '${SERVICE_NAME}'
     - '--region=${REGION}'
-    - '--service-account=${PROJECT_NUMBER}-compute@developer.gserviceaccount.com'
+    - '--service-account=${PROJECT_ID}@appspot.gserviceaccount.com'
     - '--max-instances=1'
     - '--allow-unauthenticated'
     - '--runtime=python37'
