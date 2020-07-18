@@ -1,8 +1,22 @@
 # push-to-gcp
 BASH scripts that can be used to bootstrap small projects that can be tested, built, and deployed to Google Cloud Platform with a Git push operation.
 
+## Requirements
+* Cloud SDK must be installed.
+* You must authenticate using the `gcloud` command.
+* You must set a project using the `gcloud` command.
+* You must initialize the git repository.
 
-## Example Usage
+## Usage
+```
+cloudfunctions-python37.sh <FRIENDLY_NAME>
+```
+or
+```
+cloudrun.sh <FRIENDLY_NAME>
+```
+
+## Output
 ### cloudfunctions-python37.sh
 Example usage and output:
 ```
@@ -58,7 +72,6 @@ Creating a Google Cloud Source repository.
 Created [funky37].
 WARNING: You may be billed for this repository. See https://cloud.google.com/source-repositories/docs/pricing for details.
 Adding Google Cloud Source repository as remote to local Git repository.
-fatal: remote google already exists.
 Creating build trigger for when code is pushed to master.
 Created [https://cloudbuild.googleapis.com/v1/projects/myproject/triggers/59488aeb-5e4e-48c0-9016-2940b643c2fd].
 NAME     CREATE_TIME                STATUS
