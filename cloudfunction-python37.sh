@@ -26,6 +26,18 @@ REGION="us-central1"
 PROJECT_ID=$(gcloud config get-value project)
 PROJECT_NUMBER=$(gcloud projects list --filter="project_id=${PROJECT_ID}" --format="value(project_number)")
 
+echo "Enabling Google Cloud Build API." >&2
+[[ $(gcloud services list --format='value(config.name)' --filter='config.name=cloudbuild.googleapis.com') ]] ||
+  { gcloud services enable cloudbuild.googleapis.com; }
+
+echo "Enabling Google Cloud Source Repository API" >&2
+[[ $(gcloud services list --format='value(config.name)' --filter='config.name=sourcerepo.googleapis.com') ]] ||
+  { gcloud services enable sourcerepo.googleapis.com; }
+
+echo "Enabling Google Cloud Functions API." >&2
+[[ $(gcloud services list --format='value(config.name)' --filter='config.name=cloudfunctions.googleapis.com') ]] ||
+  { gcloud services enable cloudfunctions.googleapis.com; }
+
 echo "Adding permissions to default Cloud Build service account." >&2
 # https://stackoverflow.com/questions/58544241/correct-permissions-for-google-cloud-build-to-deploy-a-cloudfunction-in-a-separa
 # https://cloud.google.com/iam/docs/understanding-roles#cloud-functions-roles
