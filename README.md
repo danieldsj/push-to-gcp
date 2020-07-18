@@ -6,8 +6,13 @@ BASH scripts that can be used to bootstrap small projects that can be tested, bu
 * Creates a Google Cloud Source Repository.
 * Adds the Google Cloud Source Repository as a remote on the local Git repository.
 * Creates a Google Cloud Build trigger.
+* Generates some sample files:
+  * An appropriate cloudbuild.yaml file.
+  * For `cloudfunctions-python37.sh` - Several files to support a simple python function that responds with `hello world`.
+  * For `cloudrun.sh` - Several files to support a simple Nginx container that hosts an `index.html` file that displays `hello world`.
 * Provides instructions on how to push.
 * Provides instructions on how to get the URL of what you pushed.
+* Defaults to auto-scaling to only one instance to avoid any runaway costs.
 
 ## Requirements
 * Cloud SDK must be installed.
