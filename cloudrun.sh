@@ -21,12 +21,15 @@ echo "Checking if present working directory is a Git repository." >&2
 [[ $(git rev-parse --is-inside-work-tree) ]]  ||
   { echo "Currently not in a initialized git repository. Initialize git repository first."; exit 1;}
 
-
 REPO_NAME="${1}"
 SERVICE_NAME="${1}"
 REGION="us-central1"
 PROJECT_ID=$(gcloud config get-value project)
 PROJECT_NUMBER=$(gcloud projects list --filter="project_id=${PROJECT_ID}" --format="value(project_number)")
+
+echo "Enabling Google Cloud Build API." >&2
+[[ $(gcloud services list --format='value(config.name)' --filter='config.name=cloudbuild.googleapis.com' ]] ||
+  { gcloud services enable cloudbuild.googleapis.com; }
 
 echo "Adding permissions to default Cloud Build service account." >&2
 # https://phpnews.io/feeditem/google-cloud-build-google-cloud-run-fixing-error-gcloud-run-deploy-permission-denied-the-caller-does-not-have-permission
