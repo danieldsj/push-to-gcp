@@ -31,6 +31,14 @@ echo "Enabling Google Cloud Build API." >&2
 [[ $(gcloud services list --format='value(config.name)' --filter='config.name=cloudbuild.googleapis.com') ]] ||
   { gcloud services enable cloudbuild.googleapis.com; }
 
+echo "Enabling Google Cloud Source Repository API" >&2
+[[ $(gcloud services list --format='value(config.name)' --filter='config.name=sourcerepo.googleapis.com') ]] ||
+  { gcloud services enable sourcerepo.googleapis.com; }
+
+echo "Enabling Google Cloud Run API." >&2
+[[ $(gcloud services list --format='value(config.name)' --filter='config.name=run.googleapis.com') ]] ||
+  { gcloud services enable run.googleapis.com; }
+
 echo "Adding permissions to default Cloud Build service account." >&2
 # https://phpnews.io/feeditem/google-cloud-build-google-cloud-run-fixing-error-gcloud-run-deploy-permission-denied-the-caller-does-not-have-permission
 gcloud projects add-iam-policy-binding $PROJECT_ID \
