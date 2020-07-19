@@ -32,6 +32,27 @@ or
 ```
 cloudrun.sh <FRIENDLY_NAME>
 ```
+
+## Cost
+Although one of the goals of this projects is to keep costs low, using this script may result in a project that can incure costs. The bash scripts have a bias towards solutions that scale to zero to keep costs as low as possible.
+
+### Cloud Run
+Cloud Run [pricing](https://cloud.google.com/run/pricing) is based on CPU, Memory, # of requests, and egress bandwidth. In order to minimize some of the costs, we did the following:
+* Set a maximum to `1` [instance](https://cloud.google.com/sdk/gcloud/reference/run/services/update#--max-instances).
+* Set instances to `200m` [CPU](https://cloud.google.com/run/docs/configuring/cpu#command-line) (First 180,000 vCPU-seconds free).
+* Set instances to `128Mi` of [memory](https://cloud.google.com/sdk/gcloud/reference/run/services/update#--memory) (First 360,000 GiB-seconds free).
+
+### Cloud Function
+Cloud Function [pricing](https://cloud.google.com/functions/pricing) is based on the number of invocations, compute time, and egress network traffic. In order to minimize cost, we did the following:
+* Set the maximum number of [instances](https://cloud.google.com/sdk/gcloud/reference/functions/deploy#--max-instances) to `1`.
+* Set the [memory](https://cloud.google.com/sdk/gcloud/reference/functions/deploy#--memory) to the minmum value of `128mi`. 
+
+### Cloud Storage Repository
+Cloud Storage Repository [pricing](https://cloud.google.com/source-repositories/pricing) is based on number of project-users, storage, and egress. Many of these costs are heavily dependent on the nature of the software you are building. Keep in mind that due to the number of projects I created for testing, I was eventually billed for more than 5 project-users in a month.  This was my first charge throughout testing.  This cost may be mitigated by using [creating triggers for GitHub repositories](https://cloud.google.com/sdk/gcloud/reference/beta/builds/triggers/create/github) instead of Google Cloud Platform repositories.
+
+### Cloud Build
+Cloud Build [pricing](https://cloud.google.com/cloud-build/pricing) is based on build minutes, and the rates vary depending on what [machine type](https://cloud.google.com/sdk/gcloud/reference/builds/submit#--machine-type) is being used. The machine type used can be defined in the `cloudbuild.yaml`, but defaults to the most cost effective 1 CPU option according to the [documentation](https://cloud.google.com/cloud-build/docs/build-config#options).
+
 ## Example Usage
 The following is a possible workflow:
 1. Create a new Google Cloud Platform project.
