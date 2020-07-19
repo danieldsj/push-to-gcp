@@ -1,6 +1,5 @@
 #!/bin/bash
 
-
 echo "Checking arguments." >&2
 [[ $# -eq 1 ]] || 
   { echo "Command takes 1 arguments.  Example usage: $0 <FRIENDLY_NAME>"; exit 1; }
@@ -93,11 +92,12 @@ cat > cloudbuild.yaml << EOF
    - '--cpu'
    - '1'
    - '--memory'
-   - '256Mi'
+   - '128Mi'
+   - '--cpu'
+   - '200m'
    - '--max-instances'
    - '1'
    - '--allow-unauthenticated'
- # - '--no-allow-unauthenticated'
  images:
  - 'gcr.io/$PROJECT_ID/${SERVICE_NAME}:\$COMMIT_SHA'
 EOF
